@@ -34,7 +34,7 @@ private int resultat=0;
         final Button button1 = (Button) findViewById(R.id.button1);
       final Button button2 = (Button) findViewById(R.id.button2);
 
-        questionText.setText(question[index].getQuestion()+resultat);
+        questionText.setText(question[index].getQuestion());
         button1.setText(question[index].getQuestion1());
         button2.setText(question[index].getQuestion2());
 
@@ -44,8 +44,8 @@ private int resultat=0;
             @Override
             public void onClick(View view) {
                 Log.d("Bouton", "Bouton 1");
-                if(index<question.length-1) {
-                    questionText.setText(question[index].getQuestion()+resultat);
+                if(index<question.length) {
+                    questionText.setText(question[index].getQuestion());
                     if(question[index].isResponse()){
                         resultat++;
                     }
@@ -71,7 +71,7 @@ private int resultat=0;
             public void onClick(View view) {
                 Log.d("Bouton", "Bouton 2");
 
-                if(index<question.length-1) {
+                if(index<question.length) {
                     questionText.setText(question[index].getQuestion());
                     if(!question[index].isResponse()){
                         resultat++;
