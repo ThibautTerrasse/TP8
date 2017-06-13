@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d("Bouton", "Bouton 1");
                 if(question[index].isResponse()){
-                    resultat++; //si la première réponse est bonne on incrémente le score
+                    resultat++;
 
                 }
 
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Bouton", "Bouton 2");
 
                 if(!question[index].isResponse()){
-                    resultat++; //si la deuxième réponse est bonne alors on incrémente le score
+                    resultat++;
 
                 }
                 index++; // on incrémente pour changer de question
