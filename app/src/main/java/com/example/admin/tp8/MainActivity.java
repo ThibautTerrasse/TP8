@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
                     final int score = resultat;
 
                     //envoie du score sur la deuxième activity
-                    intent.putExtra("param",score);
-                    intent.putExtra("total",index);
+                    intent.putExtra("scoreCandidat",score);
+                    intent.putExtra("totalMax",index);
                     startActivity(intent);
                 }
 
