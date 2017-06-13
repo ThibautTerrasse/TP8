@@ -51,9 +51,9 @@ public class MainActivity extends AppCompatActivity {
 
                 index++; //on incrémente l'index pour changer de question
 
-                if(index<question.length) {
+                if(index<question.length) { // on vérifie que l'on est encore dans le tableau
 
-                    //Modification des élément de l'activity
+                    //Modification des éléments de l'activity avec le bon index
                     questionText.setText(question[index].getQuestion());
                     button1.setText(question[index].getQuestion1());
                     button2.setText(question[index].getQuestion2());
@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, Activity2.class);
                     final int score = resultat;
                     intent.putExtra("param",score); //envoie du score sur la deuxième activity
+                    intent.putExtra("total",index);
                     startActivity(intent);
                 }
 
@@ -95,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, Activity2.class);
                     final int score = resultat;
                     intent.putExtra("param",score);
+                    intent.putExtra("total",index);
+
                     startActivity(intent);
                 }
 
