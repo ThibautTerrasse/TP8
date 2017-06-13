@@ -14,25 +14,25 @@ public class MainActivity extends AppCompatActivity {
     private VraiFaux[] question = new VraiFaux[]{
             new VraiFaux("Qui a fait a pole position au grandprix de F1 du Cananda?", "Lewis Hamilton","Sebastian Vettel", true),
             new VraiFaux("Qui a gagné le grandprix de F1 du Cananda?", "Lewis Hamilton","Daniel Ricciardo", true),
-            new VraiFaux("Qui a fait a pole position au grandprix de F1 du Cananda?", "Lewis Hamilton","Sebastian Vettel", true),
-            new VraiFaux("Qui a gagné le grandprix de F1 du Cananda?", "Lewis Hamilton","Daniel Ricciardo", true),
-            new VraiFaux("Qui a fait a pole position au grandprix de F1 du Cananda?", "Lewis Hamilton","Sebastian Vettel", true),
-            new VraiFaux("Qui a gagné le grandprix de F1 du Cananda?", "Lewis Hamilton","Daniel Ricciardo", true),
-            new VraiFaux("Qui a fait a pole position au grandprix de F1 du Cananda?", "Lewis Hamilton","Sebastian Vettel", true),
-            new VraiFaux("Qui a gagné le grandprix de F1 du Cananda?", "Lewis Hamilton","Daniel Ricciardo", true),
+            new VraiFaux("A quel place a fini Esteban Ocon sur le GrandPrix du Canada?", "6","3", true),
+            new VraiFaux("Qui a eu un accident au début du GradPrix du Canada?", "Kimi Raikonnen","Carlos Sainz", false),
+            new VraiFaux("Qui est en tête du Championnat pilote de F1 2017?", "Sebastian Vettel","Lewis Hamilton", true),
+            new VraiFaux("Quelle est le nombre total de victoire de Lewis Hamilton?", "53","56", false),
+            new VraiFaux("Quel est le prochain GrandPrix de F1?", "Baku","Spa Francorchamps", true),
+            new VraiFaux("Quelle est la place de Max Verstappen aux Championnat?", "6","4", true),
     };
     private int index = 0;
-private int resultat=0;
+    private int resultat = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Affichage des données du tableau VraiFauxs ur les éléments de l'activity
         final TextView questionText = (TextView) findViewById(R.id.textView2);
-
-
         final Button button1 = (Button) findViewById(R.id.button1);
-      final Button button2 = (Button) findViewById(R.id.button2);
+        final Button button2 = (Button) findViewById(R.id.button2);
 
         questionText.setText(question[index].getQuestion());
         button1.setText(question[index].getQuestion1());
@@ -44,24 +44,30 @@ private int resultat=0;
             @Override
             public void onClick(View view) {
                 Log.d("Bouton", "Bouton 1");
+                if(question[index].isResponse()){
+                    resultat++; //si la réponse est bonne on incrémente le score
+
+                }
+
+                index++; //on incrémente l'index pour changer de question
+
                 if(index<question.length) {
+
+                    //Modification des élément de l'activity
                     questionText.setText(question[index].getQuestion());
-                    if(question[index].isResponse()){
-                        resultat++;
-                    }
                     button1.setText(question[index].getQuestion1());
                     button2.setText(question[index].getQuestion2());
-
-                    index++;
-
                 }
+
                 else {
+
                     Intent intent = new Intent(MainActivity.this, Activity2.class);
                     final int score = resultat;
-                    intent.putExtra("param",score);
+                    intent.putExtra("param",score); //envoie du score sur la deuxième activity
                     startActivity(intent);
                 }
-                }
+
+            }
         });
 
         button2.setOnClickListener(new View.OnClickListener() {
@@ -71,22 +77,27 @@ private int resultat=0;
             public void onClick(View view) {
                 Log.d("Bouton", "Bouton 2");
 
-                if(index<question.length) {
+                if(!question[index].isResponse()){
+                    resultat++;
+
+                }
+                index++;
+
+                if(index<question.length){
+
                     questionText.setText(question[index].getQuestion());
-                    if(!question[index].isResponse()){
-                        resultat++;
-                    }
                     button1.setText(question[index].getQuestion1());
                     button2.setText(question[index].getQuestion2());
-
-                    index++;
                 }
+
                 else {
+
                     Intent intent = new Intent(MainActivity.this, Activity2.class);
                     final int score = resultat;
                     intent.putExtra("param",score);
                     startActivity(intent);
                 }
+
             }
         });
     }
