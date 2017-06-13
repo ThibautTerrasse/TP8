@@ -17,9 +17,10 @@ public class Activity2 extends AppCompatActivity {
         //on récupère l'intent qui a lancé votre activité
         Intent intent = getIntent();
        int texte = intent.getIntExtra("param",0);
+        int total = intent.getIntExtra("total",0);
 
         TextView editText = (TextView) findViewById(R.id.response);
-        editText.setText(texte + "");
+        editText.setText(texte +"/"+total);
 
     }
 }

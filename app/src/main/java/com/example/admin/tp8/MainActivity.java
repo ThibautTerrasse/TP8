@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    //tableau de questions et réponses
     private VraiFaux[] question = new VraiFaux[]{
             new VraiFaux("Qui a fait a pole position au grandprix de F1 du Cananda?", "Lewis Hamilton","Sebastian Vettel", true),
             new VraiFaux("Qui a gagné le grandprix de F1 du Cananda?", "Lewis Hamilton","Daniel Ricciardo", true),
@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
             new VraiFaux("Quel est le prochain GrandPrix de F1?", "Baku","Spa Francorchamps", true),
             new VraiFaux("Quelle est la place de Max Verstappen aux Championnat?", "6","4", true),
     };
+
+    //Compteur pour l'index et le score
     private int index = 0;
     private int resultat = 0;
 
@@ -29,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Affichage des données du tableau VraiFauxs ur les éléments de l'activity
+        //Affichage des données du tableau VraiFauxs sur les éléments de l'activity
         final TextView questionText = (TextView) findViewById(R.id.textView2);
         final Button button1 = (Button) findViewById(R.id.button1);
         final Button button2 = (Button) findViewById(R.id.button2);
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d("Bouton", "Bouton 1");
                 if(question[index].isResponse()){
-                    resultat++; //si la réponse est bonne on incrémente le score
+                    resultat++; //si la première réponse est bonne on incrémente le score
 
                 }
 
@@ -63,7 +65,9 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(MainActivity.this, Activity2.class);
                     final int score = resultat;
-                    intent.putExtra("param",score); //envoie du score sur la deuxième activity
+
+                    //envoie du score sur la deuxième activity
+                    intent.putExtra("param",score);
                     intent.putExtra("total",index);
                     startActivity(intent);
                 }
@@ -79,13 +83,14 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Bouton", "Bouton 2");
 
                 if(!question[index].isResponse()){
-                    resultat++;
+                    resultat++; //si la deuxième réponse est bonne alors on incrémente le score
 
                 }
-                index++;
+                index++; // on incrémente pour changer de question
 
-                if(index<question.length){
+                if(index<question.length){ // Vérification que l'on est encore dans le tableau
 
+                    //modication des éléments de l'activity
                     questionText.setText(question[index].getQuestion());
                     button1.setText(question[index].getQuestion1());
                     button2.setText(question[index].getQuestion2());
@@ -95,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(MainActivity.this, Activity2.class);
                     final int score = resultat;
+
+                    //envoie du score sur la deuxième activity
                     intent.putExtra("param",score);
                     intent.putExtra("total",index);
 
